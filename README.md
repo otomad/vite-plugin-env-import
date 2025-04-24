@@ -1,26 +1,55 @@
-# vite-plugin-iso-import
+# vite-plugin-env-import
 
-Import modules isomorphically. [Vite discussion](https://github.com/vitejs/vite/discussions/4172) for potential built-in support.
+[![npm](https://img.shields.io/npm/v/vite-plugin-env-import?logo=npm&logoColor=%23CB3837&label=npm&labelColor=white&color=%23CB3837)](https://www.npmjs.org/package/vite-plugin-env-import)
+[![GitHub](https://img.shields.io/npm/v/vite-plugin-env-import?logo=github&label=GitHub&color=%23181717)](https://github.com/otomad/vite-plugin-env-import.js)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)][license-url]
+
+[license-url]: https://opensource.org/licenses/MIT
+
+Import modules isomorphically in the client, server, development, or production. [Vite discussion](https://github.com/vitejs/vite/discussions/4172) for potential built-in support.
+
+Focked from [vite-plugin-iso-import](https://github.com/bluwy/vite-plugin-iso-import). And added the environment-specific import for DEV and PROD.
 
 ## Usage
 
 Input:
 
-```js
-import { foo } from './client-module?client'
-import { bar } from './server-module?server'
+```javascript
+import { foo } from "./client-module?client";
+import { bar } from "./server-module?server";
 ```
 
 Normal build output:
 
-```js
-import { foo } from './client-module'
+```javascript
+import { foo } from "./client-module";
 ```
 
 SSR build output:
 
-```js
-import { bar } from './server-module'
+```javascript
+import { bar } from "./server-module";
+```
+
+---
+
+Input:
+
+```javascript
+import { foo } from "./dev-module?dev";
+import { bar } from "./prod-module?prod";
+```
+
+Development mode output:
+
+```javascript
+import { foo } from "./dev-module";
+```
+
+Production mode output:
+
+```javascript
+import { bar } from "./prod-module";
 ```
 
 ## Installation
@@ -28,16 +57,23 @@ import { bar } from './server-module'
 Install library:
 
 ```bash
-$ npm i -D vite-plugin-iso-import
+# npm
+npm install --save-dev vite-plugin-env-import
+
+# yarn
+yarn add --save-dev vite-plugin-env-import
+
+# pnpm
+pnpm add --save-dev vite-plugin-env-import
 ```
 
-Add plugin to `vite.config.js`:
+Add plugin to `vite.config.js` or `vite.config.ts`:
 
-```js
-import { isoImport } from 'vite-plugin-iso-import'
+```javascript
+import { envImport } from "vite-plugin-env-import";
 
 export default defineCnfig({
-  plugins: [isoImport()]
+  plugins: [envImport()]
 })
 ```
 
@@ -45,16 +81,16 @@ export default defineCnfig({
 
 ### What happens if I use an import value that has been stripped off?
 
-You'll get a usual JS error of the value being unreferenced/undefined. Instead, you should always wrap these environment-specific code with `import.meta.env.SSR`.
+You'll get a usual JS error of the value being unreferenced/undefined. Instead, you should always wrap these environment-specific code with [`import.meta.env.*`](https://vite.dev/guide/env-and-mode#built-in-constants).
 
-### Using `?client` and `?server` loses intellisense
+### Using `?env` loses intellisense
 
 The library exports a custom TypeScript plugin that fixes it. Simply update your `jsconfig.json` or `tsconfig.json` like so:
 
-```json
+```javascripton
 {
   "compilerOptions": {
-    "plugins": [{ "name": "vite-plugin-iso-import" }]
+    "plugins": [{ "name": "vite-plugin-env-import" }]
   }
 }
 ```
@@ -67,20 +103,20 @@ Also note that this currently does not work for Vue and Svelte files. The langua
 // global.d.ts (or any ambient dts file)
 
 // default export
-declare module 'camelcase?client' {
-  import all from 'camelcase'
-  export = all
+declare module "camelcase?client" {
+  import all from "camelcase";
+  export = all;
 }
 
 // named export
-declare module 'lodash-es?server' {
-  import * as all from 'lodash-es'
-  export = all
+declare module "lodash-es?server" {
+  import * as all from "lodash-es";
+  export = all;
 }
 
 // fallback
-declare module '*?client'
-declare module '*?server'
+declare module "*?client";
+declare module "*?server";
 ```
 
 ## License

@@ -1,8 +1,8 @@
 {
-	"name": "vite-plugin-iso-import",
-	"description": "Import modules isomorphically",
-	"version": "1.2.0",
-	"author": "Bjorn Lu",
+	"name": "vite-plugin-env-import",
+	"description": "Import modules isomorphically in the client, server, dev, or prod",
+	"version": "1.3.0",
+	"author": "lunate",
 	"license": "MIT",
 	"type": "module",
 	"types": "./index.d.ts",
@@ -23,13 +23,13 @@
 		"index.d.ts",
 		"index.d.cts"
 	],
-	"homepage": "https://github.com/bluwy/vite-plugin-iso-import",
+	"homepage": "https://github.com/otomad/vite-plugin-env-import",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/bluwy/vite-plugin-iso-import.git"
+		"url": "git+https://github.com/otomad/vite-plugin-env-import.git"
 	},
 	"bugs": {
-		"url": "https://github.com/bluwy/vite-plugin-iso-import/issues"
+		"url": "https://github.com/otomad/vite-plugin-env-import/issues"
 	},
 	"keywords": [
 		"vite",
@@ -38,7 +38,7 @@
 		"import"
 	],
 	"scripts": {
-		"why-ts-plugin": "node scripts/createFacadeTsPlugin.js"
+		"why-ts-plugin": "tsx scripts/createFacadeTsPlugin.ts"
 	},
 	"packageManager": "pnpm@9.15.4",
 	"dependencies": {
@@ -50,6 +50,7 @@
 	},
 	"devDependencies": {
 		"@types/node": "^22.10.10",
+		"tsx": "^4.19.3",
 		"typescript": "^5.7.3",
 		"vite": "^6.0.11"
 	}

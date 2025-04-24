@@ -1,1 +1,1 @@
-export declare function isoImport(): import('vite').Plugin
+export declare function isoImport(): import("vite").Plugin;
