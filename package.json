@@ -13,15 +13,14 @@
 				"default": "./src/index.js"
 			},
 			"require": {
-				"types": "./index.d.cts",
+				"types": "./index.d.ts",
 				"default": "./src/index.cjs"
 			}
 		}
 	},
 	"files": [
-		"src",
-		"index.d.ts",
-		"index.d.cts"
+		"dist",
+		"index.d.ts"
 	],
 	"homepage": "https://github.com/otomad/vite-plugin-env-import",
 	"repository": {
@@ -38,7 +37,10 @@
 		"import"
 	],
 	"scripts": {
-		"why-ts-plugin": "tsx scripts/createFacadeTsPlugin.ts"
+		"why-ts-plugin": "tsx scripts/createFacadeTsPlugin.ts",
+		"build:tsc": "pnpm run clean && tsc --build && pnpm run fix:prettier-dist",
+		"clean": "rimraf ./lib/dist",
+		"fix:prettier-dist": "prettier dist/**/* --write --ignore-path=.prettierignore"
 	},
 	"packageManager": "pnpm@9.15.4",
 	"dependencies": {
@@ -50,6 +52,8 @@
 	},
 	"devDependencies": {
 		"@types/node": "^22.10.10",
+		"prettier": "^3.5.3",
+		"rimraf": "^6.0.1",
 		"tsx": "^4.19.3",
 		"typescript": "^5.7.3",
 		"vite": "^6.0.11"

@@ -32,7 +32,7 @@ function removeEnvArgs(name: string) {
 /**
  * Isomorphically import modules on client, server, dev, or prod context.
  */
-const isoImport = (): VitePlugin => {
+export const envImport = (): VitePlugin => {
 	let config: ResolvedConfig;
 
 	return {
@@ -166,7 +166,7 @@ const esbuildPatchPlugin = (): ESBuildPlugin => ({
  * TypeScript plugin to correctly resolve ?client, ?server, ?dev, and ?prod imports.
  * Only works for JS and TS files. Vue and Svelte are not supported.
  */
-function tsPlugin() {
+export default function tsPlugin() {
 	function create(info: PluginCreateInfo) {
 		// Thanks: https://github.com/sveltejs/language-tools/blob/6e0396ca18ea5e7da801468eab35cdef43b3c979/packages/typescript-plugin/src/module-loader.ts#L56
 		const originalResolveModuleNames =
@@ -188,7 +188,3 @@ function tsPlugin() {
 
 	return { create };
 }
-
-module.exports = tsPlugin;
-tsPlugin.default = tsPlugin;
-tsPlugin.isoImport = isoImport;
