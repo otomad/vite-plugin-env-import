@@ -69,8 +69,8 @@ export const envImport = (): VitePlugin => {
 				// Ignore if no name or is dynamic import
 				if (!import_.n || import_.d !== -1) continue;
 				const queryIndex = import_.n.indexOf("?");
-				const params = new URLSearchParams(import_.n);
-				if (params.size === 0) continue;
+				const params = new URLSearchParams(import_.n.slice(queryIndex));
+				if (params.size === 0 || queryIndex === -1) continue;
 				// "?client"         => ""
 				// "?client&foo"     => "?foo"
 				// "?foo&client"     => "?foo"
