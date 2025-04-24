@@ -8,6 +8,7 @@ import path from "path";
 // Below code creates a facade "plugin" package that TypeScript can load,
 // that in turn loads `index.js`.
 const dirPath = path.resolve(process.cwd(), "node_modules/plugin");
+console.log(" dirPath", dirPath);
 if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath);
 fs.writeFileSync(path.resolve(dirPath, "./package.json"), '{"name":"plugin"}', {
 	encoding: "utf-8",

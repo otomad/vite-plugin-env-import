@@ -1,5 +1,6 @@
-import MagicString from "magic-string";
-import { init, parse } from "es-module-lexer";
+const { default: MagicString } = require("magic-string") as typeof import("magic-string");
+type MagicString = InstanceType<typeof MagicString>;
+const { init, parse } = require("es-module-lexer") as typeof import("es-module-lexer");
 import type { Plugin as VitePlugin, UserConfig, ResolvedConfig } from "vite";
 import type { server as tsserverlibrary } from "typescript/lib/tsserverlibrary";
 type PluginCreateInfo = tsserverlibrary.PluginCreateInfo;
@@ -32,7 +33,7 @@ function removeEnvArgs(name: string) {
 /**
  * Isomorphically import modules on client, server, dev, or prod context.
  */
-export const envImport = (): VitePlugin => {
+const envImport = (): VitePlugin => {
 	let config: ResolvedConfig;
 
 	return {
@@ -166,7 +167,7 @@ const esbuildPatchPlugin = (): ESBuildPlugin => ({
  * TypeScript plugin to correctly resolve ?client, ?server, ?dev, and ?prod imports.
  * Only works for JS and TS files. Vue and Svelte are not supported.
  */
-export default function tsPlugin() {
+function tsPlugin() {
 	function create(info: PluginCreateInfo) {
 		// Thanks: https://github.com/sveltejs/language-tools/blob/6e0396ca18ea5e7da801468eab35cdef43b3c979/packages/typescript-plugin/src/module-loader.ts#L56
 		const originalResolveModuleNames =
@@ -188,3 +189,7 @@ export default function tsPlugin() {
 
 	return { create };
 }
+
+export = tsPlugin;
+tsPlugin.default = tsPlugin;
+tsPlugin.envImport = envImport;
