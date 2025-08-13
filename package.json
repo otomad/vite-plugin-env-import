@@ -6,6 +6,7 @@
 	"license": "MIT",
 	"type": "commonjs",
 	"types": "./index.d.ts",
+	"main": "./src/index.cjs",
 	"exports": {
 		".": {
 			"import": {
@@ -47,20 +48,20 @@
 		"fix:prettier-dist": "prettier *.js *.cjs *.mjs --write --ignore-path=.prettierignore",
 		"clean-tsbuildinfo": "rimraf -g *.tsbuildinfo"
 	},
-	"packageManager": "pnpm@9.15.4",
+	"packageManager": "pnpm@10.14.0",
 	"dependencies": {
-		"es-module-lexer": "^1.6.0",
+		"es-module-lexer": "^1.7.0",
 		"magic-string": "^0.30.17"
 	},
 	"peerDependencies": {
 		"vite": ">=2.0.0"
 	},
 	"devDependencies": {
-		"@types/node": "^22.10.10",
+		"@types/node": "^24.1.0",
 		"prettier": "^3.5.3",
 		"rimraf": "^6.0.1",
 		"tsx": "^4.19.3",
-		"typescript": "^5.7.3",
-		"vite": "^6.0.11"
+		"typescript": "^5.9.2",
+		"vite": "^7.0.6"
 	}
 }
