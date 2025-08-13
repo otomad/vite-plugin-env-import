@@ -1,7 +1,6 @@
 {
 	"extends": "./tsconfig.json",
 	"compilerOptions": {
-		"outDir": "./",
 		"module": "commonjs",
 		"moduleResolution": "node10",
 		"verbatimModuleSyntax": false,

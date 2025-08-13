@@ -72,7 +72,7 @@ Add plugin to `vite.config.js` or `vite.config.ts`:
 ```javascript
 import { envImport } from "vite-plugin-env-import";
 
-export default defineCnfig({
+export default defineConfig({
   plugins: [envImport()]
 })
 ```
@@ -117,6 +117,8 @@ declare module "lodash-es?server" {
 // fallback
 declare module "*?client";
 declare module "*?server";
+declare module "*?dev";
+declare module "*?prod";
 ```
 
 ## License
